@@ -17,12 +17,15 @@ const createTransporter = () => {
     console.log('   - App Password:', process.env.EMAIL_APP_PASSWORD ? '✅ Set (length: ' + process.env.EMAIL_APP_PASSWORD.length + ')' : '❌ Not set');
     
     return nodemailer.createTransport({
-        service: 'gmail',
+      host: "smtp.gmail.com",
+      port: 587,
+      secure: false, // STARTTLS
         auth: {
             user: process.env.EMAIL_USER,
-            pass: process.env.EMAIL_APP_PASSWORD // Use App Password, not regular password
-        }
+            pass: process.env.EMAIL_APP_PASSWORD
+          }
     });
+
 };
 
 // Send OTP email
@@ -204,3 +207,4 @@ const sendOTPEmail = async (email, otp, userName, userRole) => {
 };
 
 module.exports = { sendOTPEmail };
+
