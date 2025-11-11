@@ -9,9 +9,14 @@ const otpRoutes = require("./routes/otpRoutes");
 const app = express();
 
 // ✅ CORS – allow frontend domain
-app.use(cors({
-  origin: process.env.FRONTEND_URL || "*",
-}));
+app.use(
+  cors({
+    origin: "https://campusdrop.vercel.app",
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  })
+);
+
 
 app.use(bodyParser.json());
 app.use(express.static("public"));
@@ -32,3 +37,4 @@ const PORT = process.env.PORT || 5000;
 app.listen(PORT, "0.0.0.0", () =>
   console.log(`✅ Server running on ${PORT}`)
 );
+
